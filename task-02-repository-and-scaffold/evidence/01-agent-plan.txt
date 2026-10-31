@@ -1,0 +1,17 @@
+# AccessG Foundation Plan & Assumptions (Task 02)
+
+## Architectural Plan
+1. Scaffold package.json with Next.js App Router, TypeScript, and Tailwind CSS.
+2. Bridge custom M3 design system tokens (task-01-design-system/tokens.css) into Tailwind CSS without overrides.
+3. Establish exact folder map (src/app, src/components, src/actions, src/lib/db.ts, public/sw.js).
+4. Implement global Prisma singleton client in src/lib/db.ts.
+5. Implement base layout.tsx and minimalist 100dvh home screen using 100% semantic token variables.
+6. Record execution metrics and diagnostics.
+
+## Stated Assumptions
+1. Tailwind CSS is configured strictly as a utility wrapper over custom CSS variables, preventing any default Tailwind color palette from overriding our M3 design system.
+2. The initial home screen occupies exactly 100dvh to provide an instant, viewport-locked mobile experience for attendees arriving at venue gates.
+3. Database connection string will use PostgreSQL with pgvector compatibility.
+4. The service worker is placed at the root level in public/sw.js to ensure full scope coverage across all client routes.
+5. Only foundational scaffolding is built; core product transaction flows and checkouts remain isolated for subsequent task phases.
+

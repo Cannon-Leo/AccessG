@@ -1,0 +1,19 @@
+@import "../../task-01-design-system/tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-surface, #ffffff);
+  color: var(--color-on-surface, #1d201e);
+  font-family: var(--type-body-large-font-family, sans-serif);
+  margin: 0;
+  padding: 0;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}

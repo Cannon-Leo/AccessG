@@ -1,0 +1,22 @@
+# Task 02 Scaffolding: Files Created & Modified
+
+The following files were created to scaffold the AccessG application foundation according to `folder-map-rules.md`, `prisma-schema-rules.md`, and the Material Design 3 token system:
+
+## 1. Project Configuration & Dependencies
+- `package.json`: Configured Next.js 15, React 19, TypeScript, Tailwind CSS, Prisma 6, and idb-keyval.
+- `tsconfig.json`: TypeScript configuration with path alias `@/*` -> `./src/*`.
+- `postcss.config.js`: PostCSS configuration loading Tailwind CSS and Autoprefixer.
+- `tailwind.config.ts`: Tailwind bridge mapping all M3 semantic color roles, typography, and shadow tokens directly to CSS variables (`var(--color-*)`, `var(--type-*)`, `var(--shadow-*)`).
+
+## 2. Core Application Architecture (Mandated Folder Structure)
+- `src/app/globals.css`: Root stylesheet importing `task-01-design-system/tokens.css` and setting dark baseline.
+- `src/app/layout.tsx`: Root HTML layout with viewport tags and `bg-inverse-surface` theme styling.
+- `src/app/page.tsx`: Minimalist `100dvh` mobile-first home screen with high-contrast `bg-primary` ("#00ff66") CTA.
+- `src/lib/db.ts`: Global PrismaClient singleton preventing connection exhaustion during Next.js hot module reloads.
+- `public/sw.js`: Root-scoped Service Worker for intercepting and serving offline IndexedDB passes.
+- `prisma/schema.prisma`: Complete database schema implementing `User`, `Event`, `Ticket`, `PaymentAttempt`, `GatekeeperLink`, and `Session` with UUID primary keys and PostgreSQL extension hooks.
+
+## 3. Directory Placeholders
+- `src/components/`: Reusable UI component folder created.
+- `src/actions/`: Server actions folder created for database mutations.
+

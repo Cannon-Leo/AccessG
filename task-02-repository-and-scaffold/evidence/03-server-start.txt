@@ -1,0 +1,10 @@
+Next.js server started on http://localhost:3008
+Process PID: 21928
+Ready in: 2564ms
+
+   ▲ Next.js 15.5.28
+   - Local:        http://localhost:3008
+   - Network:      http://192.168.1.100:3008
+
+ ✓ Starting...
+ ✓ Ready in 499ms

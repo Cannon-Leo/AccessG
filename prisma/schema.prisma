@@ -1,0 +1,121 @@
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+// User Model: Attendees, Creators, and Platform Owners
+model User {
+  id             String          @id @default(uuid())
+  email          String          @unique
+  name           String?
+  role           String          @default("ATTENDEE") // ATTENDEE, CREATOR, OWNER
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  tickets        Ticket[]
+  eventsCreated  Event[]
+  paymentAttempts PaymentAttempt[]
+  sessions       Session[]
+}
+
+// Event Model: Public Concerts and Code-locked Studio Events
+model Event {
+  id              String          @id @default(uuid())
+  title           String
+  description     String
+  location        String
+  date            DateTime
+  durationHours   Int             @default(4)
+  isStudio        Boolean         @default(false)
+  accessCode      String?         // Access code required for private studio events
+  capacity        Int
+  ticketsSold     Int             @default(0)
+  ticketPriceKobo Int             // Stored in kobo / lowest denomination
+  creatorId       String
+  creator         User            @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  tickets         Ticket[]
+  paymentAttempts PaymentAttempt[]
+  gatekeeperLinks GatekeeperLink[]
+
+  @@index([accessCode])
+  @@index([creatorId])
+}
+
+// Ticket Model: Active gate access passes
+model Ticket {
+  id               String          @id @default(uuid())
+  qrCodePayload    String          @unique // Cryptographic token for gate scanning
+  isUsed           Boolean         @default(false)
+  usedAt           DateTime?
+  userId           String
+  user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  eventId          String
+  event            Event           @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  paymentAttemptId String?         @unique
+  paymentAttempt   PaymentAttempt? @relation(fields: [paymentAttemptId], references: [id])
+  createdAt        DateTime        @default(now())
+
+  @@index([userId])
+  @@index([eventId])
+}
+
+// PaymentAttempt Model: Intent and transaction audit log
+enum PaymentStatus {
+  INITIATED
+  SUCCESS
+  FAILED
+  ABANDONED
+}
+
+model PaymentAttempt {
+  id                String        @id @default(uuid())
+  amountKobo        Int
+  status            PaymentStatus @default(INITIATED)
+  gatewayReference  String?       @unique
+  gatewayPayload    Json?
+  userId            String
+  user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  eventId           String
+  event             Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  ticket            Ticket?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([eventId])
+  @@index([status])
+}
+
+// GatekeeperLink: Rotating unauthenticated URLs with 2-hour post-event expiration
+model GatekeeperLink {
+  id         String    @id @default(uuid())
+  token      String    @unique
+  eventId    String
+  event      Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  expiresAt  DateTime
+  isRevoked  Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+
+  @@index([token])
+  @@index([eventId])
+}
+
+// Session Model: Cryptographic user sessions
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
