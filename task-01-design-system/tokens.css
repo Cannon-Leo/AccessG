@@ -1,0 +1,292 @@
+/**
+ * AccessG Design System - Production CSS Variables
+ * Generated automatically from AccessG-design-tokens.tokens.json
+ * 
+ * IMPORTANT:
+ * - Do NOT use --primitive-* variables directly in application UI.
+ * - ALWAYS use --color-* (Color Roles) for background, text, and border styling.
+ */
+
+:root {
+  /* ==========================================================================
+     1. PRIMITIVE PALETTES (Raw Palette Seeds - For Internal Token Alias Use)
+     ========================================================================== */
+  /* Key Brand Seeds */
+  --primitive-key-primary-key-color: #00ff66;
+  --primitive-key-secondary-key-color: #33cc70;
+  --primitive-key-tertiary-key-color: #b3ffd1;
+  --primitive-key-neutral-key-color: #7a857d;
+  --primitive-key-neutral-var-key-color: #6d8576;
+  --primitive-key-error-key-color: #ff3366;
+  --primitive-key-warning-key-color: #ffd600;
+  --primitive-key-accent-key-color: #00e5ff;
+  --primitive-key-accent-compliment-key-color: #d500ff;
+
+  /* Tonal Swatches */
+  --primitive-primary-0: #000000;
+  --primitive-primary-10: #003d18;
+  --primitive-primary-20: #008033;
+  --primitive-primary-30: #00c24d;
+  --primitive-primary-40: #00ff66;
+  --primitive-primary-50: #33ff85;
+  --primitive-primary-60: #66ffa3;
+  --primitive-primary-70: #99ffc2;
+  --primitive-primary-80: #c2ffe0;
+  --primitive-primary-90: #e0fff0;
+  --primitive-primary-95: #f0fff7;
+  --primitive-primary-98: #f7fffb;
+  --primitive-primary-100: #ffffff;
+  --primitive-primary-99: #fcfffd;
+  --primitive-secondary-0: #000000;
+  --primitive-secondary-10: #0c311b;
+  --primitive-secondary-20: #1a6638;
+  --primitive-secondary-30: #279954;
+  --primitive-secondary-40: #33cc70;
+  --primitive-secondary-50: #5cd68d;
+  --primitive-secondary-60: #85e0aa;
+  --primitive-secondary-70: #adebc6;
+  --primitive-secondary-90: #e6f9ee;
+  --primitive-secondary-95: #f2fdf6;
+  --primitive-secondary-98: #fafefc;
+  --primitive-secondary-99: #fdfefe;
+  --primitive-secondary-100: #ffffff;
+  --primitive-secondary-80: #c2ffe0;
+  --primitive-tertiary-0: #000000;
+  --primitive-tertiary-98: #fafffd;
+  --primitive-tertiary-95: #f7fffc;
+  --primitive-tertiary-90: #f2fff9;
+  --primitive-tertiary-80: #e6fff2;
+  --primitive-tertiary-70: #dbffed;
+  --primitive-tertiary-60: #ccffe4;
+  --primitive-tertiary-50: #c2ffe0;
+  --primitive-tertiary-40: #b3ffd1;
+  --primitive-tertiary-30: #42ff8e;
+  --primitive-tertiary-10: #006b2b;
+  --primitive-tertiary-20: #00d656;
+  --primitive-tertiary-99: #fcfffe;
+  --primitive-tertiary-100: #ffffff;
+  --primitive-neutral-0: #000000;
+  --primitive-neutral-10: #1d201e;
+  --primitive-neutral-20: #3c423e;
+  --primitive-neutral-30: #5b655f;
+  --primitive-neutral-40: #7a857d;
+  --primitive-neutral-50: #949d97;
+  --primitive-neutral-60: #afb6b2;
+  --primitive-neutral-70: #cbcecd;
+  --primitive-neutral-90: #f1f2f1;
+  --primitive-neutral-95: #f8f9f8;
+  --primitive-neutral-98: #fcfcfc;
+  --primitive-neutral-99: #fefefe;
+  --primitive-neutral-100: #ffffff;
+  --primitive-neutral-80: #e1e3e2;
+  --primitive-neutral-var-0: #000000;
+  --primitive-neutral-var-10: #1b221e;
+  --primitive-neutral-var-20: #37453d;
+  --primitive-neutral-var-30: #50665a;
+  --primitive-neutral-var-40: #6d8576;
+  --primitive-neutral-var-50: #869c8e;
+  --primitive-neutral-var-60: #a1b3a8;
+  --primitive-neutral-var-70: #becac3;
+  --primitive-neutral-var-80: #dde3e0;
+  --primitive-neutral-var-90: #f0f4f2;
+  --primitive-neutral-var-95: #f8f9f9;
+  --primitive-neutral-var-98: #fdfdfd;
+  --primitive-neutral-var-99: #fefefe;
+  --primitive-neutral-var-100: #ffffff;
+  --primitive-error-0: #000000;
+  --primitive-error-10: #4d0014;
+  --primitive-error-20: #990029;
+  --primitive-error-30: #e6003d;
+  --primitive-error-40: #ff3366;
+  --primitive-error-50: #ff5c85;
+  --primitive-error-60: #ff85a3;
+  --primitive-error-70: #ffadc2;
+  --primitive-error-80: #ffd6e0;
+  --primitive-error-90: #ffe6eb;
+  --primitive-error-95: #fff2f5;
+  --primitive-error-98: #fff9fa;
+  --primitive-error-99: #fffcfd;
+  --primitive-error-100: #ffffff;
+  --primitive-accent-0: #000000;
+  --primitive-accent-10: #00373d;
+  --primitive-accent-20: #007280;
+  --primitive-accent-30: #00adc2;
+  --primitive-accent-40: #00e5ff;
+  --primitive-accent-50: #33eaff;
+  --primitive-accent-60: #66efff;
+  --primitive-accent-70: #99f5ff;
+  --primitive-accent-80: #c2f9ff;
+  --primitive-accent-90: #e0fdff;
+  --primitive-accent-95: #f0feff;
+  --primitive-accent-98: #faffff;
+  --primitive-accent-99: #fdffff;
+  --primitive-accent-100: #ffffff;
+  --primitive-accent-compliment-0: #000000;
+  --primitive-accent-compliment-10: #33003d;
+  --primitive-accent-compliment-20: #6a0080;
+  --primitive-accent-compliment-30: #a200c2;
+  --primitive-accent-compliment-40: #d500ff;
+  --primitive-accent-compliment-50: #de33ff;
+  --primitive-accent-compliment-60: #e666ff;
+  --primitive-accent-compliment-70: #ef99ff;
+  --primitive-accent-compliment-80: #f6c2ff;
+  --primitive-accent-compliment-90: #fbe0ff;
+  --primitive-accent-compliment-95: #fdf0ff;
+  --primitive-accent-compliment-98: #fefaff;
+  --primitive-accent-compliment-99: #fffdfe;
+  --primitive-accent-compliment-100: #ffffff;
+
+  /* ==========================================================================
+     2. COLOR ROLES (Semantic Interface Tokens - Single Source of Truth for UI)
+     ========================================================================== */
+  --color-primary: var(--primitive-primary-40, #00ff66);
+  --color-on-primary: var(--primitive-primary-100, #ffffff);
+  --color-primary-container: var(--primitive-primary-90, #e0fff0);
+  --color-on-primary-container: var(--primitive-primary-30, #00c24d);
+  --color-secondary: var(--primitive-secondary-40, #33cc70);
+  --color-on-secondary: var(--primitive-secondary-100, #ffffff);
+  --color-secondary-container: var(--primitive-secondary-90, #e6f9ee);
+  --color-on-secondary-container: var(--primitive-secondary-30, #279954);
+  --color-tertiary: var(--primitive-tertiary-40, #b3ffd1);
+  --color-on-tertiary: var(--primitive-tertiary-100, #ffffff);
+  --color-tertiary-container: var(--primitive-tertiary-90, #f2fff9);
+  --color-on-tertiary-container: var(--primitive-tertiary-30, #42ff8e);
+  --color-error: var(--primitive-error-40, #ff3366);
+  --color-on-error: var(--primitive-error-100, #ffffff);
+  --color-error-container: var(--primitive-error-90, #ffe6eb);
+  --color-on-error-container: var(--primitive-error-30, #e6003d);
+  --color-surface: var(--primitive-error-100, #ffffff);
+  --color-on-surface: var(--primitive-neutral-10, #1d201e);
+  --color-surface-variant: var(--primitive-neutral-var-90, #f0f4f2);
+  --color-on-surface-variant: var(--primitive-neutral-var-30, #50665a);
+  --color-surface-container-highest: var(--primitive-neutral-90, #f1f2f1);
+  --color-surface-container-high: var(--primitive-neutral-95, #f8f9f8);
+  --color-surface-container: var(--primitive-neutral-98, #fcfcfc);
+  --color-surface-container-lowest: var(--primitive-neutral-100, #ffffff);
+  --color-inverse-surface: var(--primitive-neutral-20, #3c423e);
+  --color-inverse-on-surface: var(--primitive-neutral-99, #fefefe);
+  --color-surface-tint: var(--primitive-primary-40, #00ff66);
+  --color-surface-tint-color: var(--primitive-primary-40, #00ff66);
+  --color-outline: var(--primitive-neutral-var-50, #869c8e);
+  --color-outline-variant: var(--primitive-neutral-var-80, #dde3e0);
+  --color-primary-fixed: var(--primitive-primary-90, #e0fff0);
+  --color-on-primary-fixed: var(--primitive-primary-10, #003d18);
+  --color-primary-fixed-dim: var(--primitive-primary-80, #c2ffe0);
+  --color-on-primary-fixed-variant: var(--primitive-primary-30, #00c24d);
+  --color-inverse-primary: var(--primitive-primary-80, #c2ffe0);
+  --color-secondary-fixed: var(--primitive-secondary-90, #e6f9ee);
+  --color-on-secondary-fixed: var(--primitive-secondary-10, #0c311b);
+  --color-secondary-fixed-dim: var(--primitive-secondary-80, #c2ffe0);
+  --color-on-secondary-fixed-dim: var(--primitive-secondary-30, #279954);
+  --color-tertiary-fixed: var(--primitive-tertiary-90, #f2fff9);
+  --color-on-tertiary-fixed: var(--primitive-tertiary-10, #006b2b);
+  --color-tertiary-fixed-dim: var(--primitive-tertiary-80, #e6fff2);
+  --color-on-tertiary-fixed-dim: var(--primitive-tertiary-30, #42ff8e);
+  --color-background: var(--primitive-neutral-98, #fcfcfc);
+  --color-on-background: var(--primitive-neutral-10, #1d201e);
+  --color-surface-bright: var(--primitive-neutral-98, #fcfcfc);
+  --color-surface-dim: var(--primitive-neutral-99, #fefefe);
+  --color-scrim: var(--primitive-neutral-0, #000000);
+  --color-shadow: var(--primitive-neutral-0, #000000);
+
+  /* ==========================================================================
+     3. TYPOGRAPHY SYSTEM (Display, Headline, Title, Body, Label)
+     ========================================================================== */
+  /* display large */
+  --type-display-large-font-family: "Noto Sans", sans-serif;
+  --type-display-large-weight: 400;
+  --type-display-large-size: 4rem;
+  --type-display-large-line-height: 1.50;
+  --type-display-large-letter-spacing: -0.188rem;
+  /* display medium */
+  --type-display-medium-font-family: "Noto Sans", sans-serif;
+  --type-display-medium-weight: 700;
+  --type-display-medium-size: 3.5rem;
+  --type-display-medium-line-height: 1.50;
+  --type-display-medium-letter-spacing: -0.188rem;
+  /* display small */
+  --type-display-small-font-family: "Noto Sans", sans-serif;
+  --type-display-small-weight: 600;
+  --type-display-small-size: 2.5rem;
+  --type-display-small-line-height: 1.50;
+  --type-display-small-letter-spacing: -0.125rem;
+  /* headline large */
+  --type-headline-large-font-family: "Noto Sans", sans-serif;
+  --type-headline-large-weight: 600;
+  --type-headline-large-size: 2rem;
+  --type-headline-large-line-height: 1.50;
+  --type-headline-large-letter-spacing: -0.113rem;
+  /* headline medium */
+  --type-headline-medium-font-family: "Noto Sans", sans-serif;
+  --type-headline-medium-weight: 600;
+  --type-headline-medium-size: 1.75rem;
+  --type-headline-medium-line-height: 1.50;
+  --type-headline-medium-letter-spacing: -0.094rem;
+  /* headline small */
+  --type-headline-small-font-family: "Noto Sans", sans-serif;
+  --type-headline-small-weight: 600;
+  --type-headline-small-size: 1.5rem;
+  --type-headline-small-line-height: 1.50;
+  --type-headline-small-letter-spacing: -0.094rem;
+  /* title large */
+  --type-title-large-font-family: "Noto Sans", sans-serif;
+  --type-title-large-weight: 600;
+  --type-title-large-size: 1.375rem;
+  --type-title-large-line-height: 1.50;
+  --type-title-large-letter-spacing: -0.063rem;
+  /* title medium */
+  --type-title-medium-font-family: "Noto Sans", sans-serif;
+  --type-title-medium-weight: 600;
+  --type-title-medium-size: 1rem;
+  --type-title-medium-line-height: 1.50;
+  --type-title-medium-letter-spacing: -0.094rem;
+  /* title small */
+  --type-title-small-font-family: "Noto Sans", sans-serif;
+  --type-title-small-weight: 600;
+  --type-title-small-size: 0.875rem;
+  --type-title-small-line-height: 1.43;
+  --type-title-small-letter-spacing: -0.063rem;
+  /* body large */
+  --type-body-large-font-family: "Poppins", sans-serif;
+  --type-body-large-weight: 500;
+  --type-body-large-size: 1rem;
+  --type-body-large-line-height: 1.50;
+  --type-body-large-letter-spacing: -0.05rem;
+  /* body medium */
+  --type-body-medium-font-family: "Poppins", sans-serif;
+  --type-body-medium-weight: 500;
+  --type-body-medium-size: 0.875rem;
+  --type-body-medium-line-height: 1.43;
+  --type-body-medium-letter-spacing: -0.037rem;
+  /* body small */
+  --type-body-small-font-family: "Poppins", sans-serif;
+  --type-body-small-weight: 500;
+  --type-body-small-size: 0.75rem;
+  --type-body-small-line-height: 1.50;
+  --type-body-small-letter-spacing: -0.05rem;
+  /* label large */
+  --type-label-large-font-family: "Poppins", sans-serif;
+  --type-label-large-weight: 500;
+  --type-label-large-size: 0.875rem;
+  --type-label-large-line-height: 1.43;
+  --type-label-large-letter-spacing: -0.025rem;
+  /* label medium */
+  --type-label-medium-font-family: "Poppins", sans-serif;
+  --type-label-medium-weight: 500;
+  --type-label-medium-size: 0.75rem;
+  --type-label-medium-line-height: 1.50;
+  --type-label-medium-letter-spacing: -0.025rem;
+  /* label small */
+  --type-label-small-font-family: "Poppins", sans-serif;
+  --type-label-small-weight: 500;
+  --type-label-small-size: 0.625rem;
+  --type-label-small-line-height: 1.50;
+  --type-label-small-letter-spacing: -0.031rem;
+
+  /* ==========================================================================
+     4. SHADOW SYSTEM (Elevation Shadows Built From Primary Brand Hue)
+     ========================================================================== */
+  --shadow-soft-shadow: 1.5px 6px 30px 0px rgba(0, 255, 102, 0.12);
+  --shadow-medium-shadow: 4px 6px 24px 0px rgba(0, 255, 102, 0.18);
+  --shadow-hard-shadow: 6px 10px 20px 0px rgba(0, 255, 102, 0.22);
+}

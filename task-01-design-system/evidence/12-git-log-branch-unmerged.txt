@@ -1,0 +1,24 @@
+﻿$ git checkout -b regression-test-broken-tokens
+Switched to a new branch 'regression-test-broken-tokens'
+
+$ git branch
+  main
+* regression-test-broken-tokens
+
+[Simulating Deliberate Regression Step 8]
+- Broke token referencing: mapped --color-primary to hardcoded #00ff66 rather than --primitive-primary-40
+- Swapped brand seed at source to electric amber (#ffd600)
+- Observed that unlinked components remained hardcoded green while tokenized components followed
+- Proof captured for 11-broken-referencing.png
+
+$ git checkout main
+Switched to branch 'main'
+
+$ git branch -D regression-test-broken-tokens
+Deleted branch regression-test-broken-tokens (was 4c20b99).
+
+$ git log -n 5 --graph --oneline
+* 4c20b99 context file updates
+* 59c690d context files, completely setup and running
+
+(Branch regression-test-broken-tokens deleted without merging. Single source of truth preserved.)

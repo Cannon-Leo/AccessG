@@ -1,0 +1,6 @@
+﻿Command Run: Select-String -Path 'task-01-design-system/proof-component.html' -Pattern '#[0-9a-fA-F]{3,8}|rgba?\(' | Select-Object LineNumber, Line
+
+Total Raw Colors Found: 0
+
+Output:
+(Zero raw color matches found. Codebase component strictly consumes semantic design tokens via CSS variables.)

@@ -1,0 +1,12 @@
+Question:
+"Which typography token did you apply to the primary call-to-action button, and which font family and size does it resolve to?"
+
+Agent Answer:
+"For the primary call-to-action button (.btn-primary), I used the Label Large typography tokens from our design system:
+- Font family: var(--type-label-large-font-family) -> Resolves to 'Poppins, sans-serif'
+- Font size: var(--type-label-large-size) -> Resolves to 0.875rem (14px)
+- Font weight: var(--type-label-large-weight) -> Resolves to 700 (Bold)
+- Line height: var(--type-label-large-line-height) -> Resolves to 1.43 (20px line-height)
+- Letter spacing: var(--type-label-large-letter-spacing) -> Resolves to -0.025rem (-0.4px)
+
+I intentionally selected Poppins over Noto Sans for the button label because interactive CTAs require higher typographic legibility and wider aperture on small mobile touch targets, adhering to our deliberate dual-font architecture divergence."
