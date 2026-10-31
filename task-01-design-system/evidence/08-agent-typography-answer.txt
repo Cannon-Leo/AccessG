@@ -10,3 +10,4 @@ Agent Answer:
 - Letter spacing: var(--type-label-large-letter-spacing) -> Resolves to -0.025rem (-0.4px)
 
 I intentionally selected Poppins over Noto Sans for the button label because interactive CTAs require higher typographic legibility and wider aperture on small mobile touch targets, adhering to our deliberate dual-font architecture divergence."
+
