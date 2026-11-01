@@ -1,3 +1,71 @@
-﻿# Deliverable: interview-answers.md
+# AccessG Task 02: The Interview Defence
 
-To be populated during Task 2 execution.
+Answers to technical architecture and engineering questions for Task 2 (maximum 200 words each).
+
+---
+
+### 1. Why choose the Next.js App Router over the legacy Pages Router for AccessG?
+The App Router provides native React Server Components (RSC) and Server Actions, which are essential for AccessG's security and performance model. With Server Components, sensitive business logic (such as PostgreSQL row-locking and access code validation) executes strictly on the server without leaking database credentials, API secrets, or validation algorithms to client JavaScript bundles. 
+Furthermore, Server Actions enable direct, type-safe database mutations without writing boilerplate API routes. The App Router's nested layouts also allow our root layout and background video mesh to remain mounted across route transitions, eliminating unnecessary re-renders when attendees navigate between event discovery and ticket views.
+
+---
+
+### 2. How does the Prisma client singleton pattern prevent connection pool exhaustion?
+In Next.js development mode, Hot Module Replacement (HMR) re-evaluates server files on every file save. If `new PrismaClient()` is instantiated at the top level of route files, each hot reload opens a fresh database connection pool without terminating the previous one, rapidly exhausting PostgreSQL's maximum connection limit (`max_connections`).
+We resolve this in `src/lib/db.ts` by attaching the PrismaClient instance to the Node.js `globalThis` object (`globalThis.prisma`). In development, the application reuses the existing global instance across reloads. In production, `globalThis` caching is bypassed, allowing standard container lifecycle management to manage connection pooling cleanly.
+
+---
+
+### 3. How does AccessG guarantee instant ticket pass display when an attendee has zero internet connectivity?
+AccessG implements a progressive offline caching pipeline using a root-scoped Service Worker (`public/sw.js`) and IndexedDB (`idb-keyval`). 
+When a ticket is purchased and confirmed with an HTTP 201 response, the encrypted ticket payload, cryptographic signature, and generated QR code vector are written directly to IndexedDB. 
+The Service Worker intercepts requests to `/passes/[id]`. If the device is offline or the cell network drops, the Service Worker immediately serves the cached application shell and hydrates the pass data directly from local IndexedDB in under 50 milliseconds, eliminating gate delays.
+
+---
+
+### 4. What is PostgreSQL row-level locking, and why is it essential for ticket sales?
+Standard relational queries (`SELECT capacity FROM Event`) are vulnerable to race conditions under heavy concurrent checkout traffic. If two attendees attempt to buy the last remaining ticket simultaneously, both read `capacity = 1`, both proceed to payment, and the event oversells.
+AccessG utilizes PostgreSQL row-level locking via `SELECT ... FOR UPDATE` within a Prisma interactive transaction (`$transaction`). This locks the targeted ticket row at the database kernel level until the transaction commits or rolls back. Subsequent concurrent requests must wait in a deterministic queue, guaranteeing that tickets can never be oversold regardless of request volume.
+
+---
+
+### 5. Why is it dangerous to rely on visual UI feedback to confirm database persistence?
+Visual UI state in modern reactive frameworks (React, Vue) is decoupled from backend database transactions. Optimistic UI patterns frequently update local component state (e.g., displaying a "Success!" checkmark) before or independently of a network response. 
+If an unhandled exception, network timeout, or database lock conflict occurs on the server, the user sees visual confirmation of an action that was never written to PostgreSQL. In access control, this results in an attendee arriving at a venue with an unpersisted pass that the gatekeeper's online scanner immediately rejects. Systems must require explicit HTTP 201 assertions with returned record UUIDs before confirming state.
+
+---
+
+### 6. How does AccessG map Material Design 3 tokens into Tailwind CSS without hardcoding arbitrary values?
+Rather than using arbitrary Tailwind classes (`text-[#00ff66]`, `bg-[#1d201e]`), AccessG configures `tailwind.config.ts` to extend semantic color and typography roles directly to CSS custom properties defined in `task-01-design-system/tokens.css`.
+For example, `bg-primary` maps to `var(--color-primary)`, `text-on-primary-fixed` maps to `var(--color-on-primary-fixed)`, and `font-display` maps to `var(--type-display-large-font-family)`. This creates a compile-time bridge where engineers write standard Tailwind utility classes, but all rendered styles resolve dynamically through the centralized token stylesheet, preserving complete multi-theme support.
+
+---
+
+### 7. What causes Next.js hydration errors, and how are they prevented in client-first components?
+Hydration errors occur when the pre-rendered HTML generated by the Node.js server does not match the initial virtual DOM tree constructed by React during client-side hydration. Common triggers include browser-only APIs (`window`, `localStorage`, `IndexedDB`), non-deterministic values (`Math.random()`, `Date.now()`), and browser auto-fill/auto-focus attributes.
+In AccessG, we prevent hydration mismatches by:
+1. Guarding client-dependent UI (such as autoplaying background videos and IndexedDB queries) with an `isMounted` state flag inside `useEffect`.
+2. Replacing HTML declarative `autoFocus` attributes with imperatively triggered `ref.current.focus()` calls.
+3. Applying `suppressHydrationWarning` to the root HTML tags for unavoidable browser extensions.
+
+---
+
+### 8. What is the difference between `100vh` and `100dvh`, and why does it matter for mobile access control?
+The legacy `100vh` CSS unit corresponds to the maximum viewport height assuming browser navigation bars and toolbars are fully hidden. On mobile browsers (Safari on iOS, Chrome on Android), when the address bar is visible, `100vh` elements overflow the visible screen, pushing critical CTA buttons or QR codes below the fold.
+The dynamic viewport unit `100dvh` (Dynamic Viewport Height) continuously recalculates as browser interface elements expand or collapse. By anchoring AccessG's landing screen and pass views to `100dvh`, the entire interface remains perfectly contained within the active screen area, preventing accidental scrolling and ensuring instant scanning.
+
+---
+
+### 9. Why are Gatekeeper links designed to require zero login while expiring two hours post-event?
+Gatekeepers are seasonal staff or temporary contractors who cannot be burdened with complex credential management, password resets, or two-factor authentication in fast-moving venue queues. 
+To balance frictionless speed with rigorous security, AccessG generates cryptographically secure, high-entropy signed URLs for gate access. To eliminate permanent exposure, the database enforces strict temporal expiration: each link contains an automated validity window that hard-expires exactly two hours after the event's scheduled conclusion, after which all scanning requests are rejected at the database query level.
+
+---
+
+### 10. How do you verify that a project scaffold is completely reproducible for new engineers?
+A reproducible scaffold requires that any engineer can clone the repository and achieve a running, passing build with zero undocumented manual steps. 
+We verify this by executing an automated clean checkout test:
+1. Cloning into a clean isolated sandbox directory without inherited environment variables.
+2. Running `npm install` and verifying clean lockfile resolution (`package-lock.json`).
+3. Running `npx prisma generate` to build client types.
+4. Executing `npm run build` and verifying that Next.js static page generation and type-checking succeed with exit code 0.

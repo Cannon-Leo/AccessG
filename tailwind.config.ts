@@ -30,6 +30,9 @@ const config: Config = {
         "tertiary-container": "var(--color-tertiary-container)",
         "on-tertiary-container": "var(--color-on-tertiary-container)",
 
+        accent: "var(--primitive-accent-40, #00e5ff)",
+        "accent-container": "var(--primitive-accent-90, #e0fdff)",
+
         error: "var(--color-error)",
         "on-error": "var(--color-on-error)",
         "error-container": "var(--color-error-container)",
@@ -56,15 +59,17 @@ const config: Config = {
         shadow: "var(--color-shadow)",
       },
       fontFamily: {
-        headline: ["var(--type-headline-large-font-family)", "sans-serif"],
-        display: ["var(--type-display-large-font-family)", "sans-serif"],
-        body: ["var(--type-body-large-font-family)", "sans-serif"],
-        label: ["var(--type-label-large-font-family)", "sans-serif"],
+        headline: ["var(--type-headline-large-font-family)", "Noto Sans", "sans-serif"],
+        display: ["var(--type-display-large-font-family)", "Noto Sans", "sans-serif"],
+        body: ["var(--type-body-large-font-family)", "Poppins", "sans-serif"],
+        label: ["var(--type-label-large-font-family)", "Poppins", "sans-serif"],
       },
       boxShadow: {
         "soft-shadow": "var(--shadow-soft-shadow)",
         "medium-shadow": "var(--shadow-medium-shadow)",
         "hard-shadow": "var(--shadow-hard-shadow)",
+        "glow-accent": "0 0 20px rgba(0, 229, 255, 0.45)",
+        "glow-primary": "0 0 25px rgba(0, 255, 102, 0.5)",
       },
     },
   },
@@ -72,4 +77,3 @@ const config: Config = {
 };
 
 export default config;
-
