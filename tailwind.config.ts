@@ -71,6 +71,20 @@ const config: Config = {
         "glow-accent": "0 0 20px rgba(0, 229, 255, 0.45)",
         "glow-primary": "0 0 25px rgba(0, 255, 102, 0.5)",
       },
+      keyframes: {
+        "slide-down": {
+          "0%": { opacity: "0", transform: "translateY(-6px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "thumb-pan": {
+          "0%, 100%": { transform: "scale(1) translate(0, 0)" },
+          "50%": { transform: "scale(1.35) translate(-8%, -6%)" },
+        },
+      },
+      animation: {
+        "slide-down": "slide-down 180ms ease-out",
+        "thumb-pan": "thumb-pan 7s ease-in-out infinite",
+      },
     },
   },
   plugins: [],
